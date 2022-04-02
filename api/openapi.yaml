@@ -1,0 +1,2277 @@
+openapi: 3.0.3
+info:
+  title: GivEnergy API Documentation (v1.5.1)
+  version: 1.0.0
+servers:
+- url: https://api.givenergy.cloud/v1
+security:
+- default: []
+tags:
+- name: Account
+- name: Communication Device
+- name: Inverter Control
+- name: Inverter Data
+- name: Site
+- name: Smart Device
+paths:
+  /account:
+    get:
+      description: Retrieves your account information
+      parameters:
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+      summary: Get Your Account Information
+      tags:
+      - Account
+  /account/{id}:
+    get:
+      description: Retrieves the information of a specific account by its ID
+      parameters:
+      - description: The ID of the account.
+        example: 17
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+      summary: Get Account Information by ID
+      tags:
+      - Account
+  /account/search/{account_user_account}:
+    get:
+      description: Retrieves the information of a specific account by its username
+      parameters:
+      - description: The username of the account
+        example: consequatur
+        explode: false
+        in: path
+        name: account_user_account
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+      summary: Get Account Information by Username
+      tags:
+      - Account
+  /account-children:
+    get:
+      description: Retrieves a list of accounts that your account has access to
+      parameters:
+      - description: Page number to return
+        example: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          description: Page number to return
+          example: 1
+          type: integer
+        style: form
+      - description: Number of items to return in a page. Defaults to 15
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          description: Number of items to return in a page. Defaults to 15
+          type: integer
+        style: form
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+      summary: Get Your Account Children Information
+      tags:
+      - Account
+  /account-children/{account}:
+    get:
+      description: Retrieves a list of accounts that the specified account has access
+        to
+      parameters:
+      - description: The ID of the account
+        example: 17
+        explode: false
+        in: path
+        name: account
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - description: Page number to return
+        example: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          description: Page number to return
+          example: 1
+          type: integer
+        style: form
+      - description: Number of items to return in a page. Defaults to 15
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          description: Number of items to return in a page. Defaults to 15
+          type: integer
+        style: form
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+      summary: Get Account Children Information by ID
+      tags:
+      - Account
+  /communication-device:
+    get:
+      description: View a collection of communication devices you have access to
+      parameters:
+      - description: Page number to return
+        example: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          description: Page number to return
+          example: 1
+          type: integer
+        style: form
+      - description: Number of items to return in a page. Defaults to 15
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          description: Number of items to return in a page. Defaults to 15
+          type: integer
+        style: form
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_5'
+      summary: Get Your Communication Devices
+      tags:
+      - Communication Device
+  /communication-device/{id}:
+    get:
+      description: Get a communication device's information by serial number
+      parameters:
+      - description: The serial number of the communication device
+        example: consequatur
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_6'
+      summary: Get Communication Device Information by Serial Number
+      tags:
+      - Communication Device
+  /inverter/{inverter}/presets:
+    get:
+      description: Retrieves a list of available setting presets for a given inverter
+      parameters:
+      - description: The serial number of the inverter
+        example: consequatur
+        explode: false
+        in: path
+        name: inverter
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                example: |-
+                  {
+                       "data": [
+                           {
+                               "id": 0,
+                               "name": "Eco",
+                               "description": "This mode will dynamically charge and discharge your batteries to minimise your import from the grid",
+                               "parameters": {
+                                   "enabled": {
+                                       "description": "Enable or disable the preset",
+                                       "validation": [
+                                           "required",
+                                           "boolean"
+                                       ]
+                                   }
+                               }
+                           },
+                           ...
+                       ]
+                  }
+                type: string
+      summary: Get Setting Presets
+      tags:
+      - Inverter Control
+  /inverter/{inverter}/presets/{id}:
+    post:
+      description: Modify one or more inverter settings using a given preset
+      parameters:
+      - description: The serial number of the inverter
+        example: consequatur
+        explode: false
+        in: path
+        name: inverter
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The preset ID
+        example: consequatur
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_7'
+      summary: Modify Preset
+      tags:
+      - Inverter Control
+  /inverter/{inverter}/settings:
+    get:
+      description: Returns a set of inverter settings available to your account
+      parameters:
+      - description: The serial number of the inverter
+        example: consequatur
+        explode: false
+        in: path
+        name: inverter
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_8'
+      summary: Get Settings List
+      tags:
+      - Inverter Control
+  /inverter/{inverter}/settings/{setting}/read:
+    post:
+      description: Read a specific setting on the inverter
+      parameters:
+      - description: The serial number of the inverter
+        example: consequatur
+        explode: false
+        in: path
+        name: inverter
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: 1
+        explode: false
+        in: path
+        name: setting
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_9'
+      summary: Read Setting
+      tags:
+      - Inverter Control
+  /inverter/{inverter}/settings/{setting}/write:
+    post:
+      description: Write a value to the setting on the inverter
+      parameters:
+      - description: The serial number of the inverter
+        example: consequatur
+        explode: false
+        in: path
+        name: inverter
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: 1
+        explode: false
+        in: path
+        name: setting
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          application/json:
+            schema:
+              properties:
+                value:
+                  description: The value of the setting
+                  example: consequatur
+                  type: mixed
+              required:
+              - value
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_10'
+      summary: Modify Setting
+      tags:
+      - Inverter Control
+  /inverter/{inverter}/system-data/latest:
+    get:
+      description: Retrieves the latest system data from the inverter
+      parameters:
+      - description: The serial number of the inverter
+        example: consequatur
+        explode: false
+        in: path
+        name: inverter
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_11'
+      summary: Get Latest System Data
+      tags:
+      - Inverter Data
+  /inverter/{inverter}/meter-data/latest:
+    get:
+      description: Retrieves the latest meter data from the inverter
+      parameters:
+      - description: The serial number of the inverter
+        example: consequatur
+        explode: false
+        in: path
+        name: inverter
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_12'
+      summary: Get Latest Meter Data
+      tags:
+      - Inverter Data
+  /inverter/{inverter}/events:
+    get:
+      description: Retrieves a list of faults that were triggered from the inverter
+        and when they were cleared
+      parameters:
+      - description: The serial number of the inverter
+        example: consequatur
+        explode: false
+        in: path
+        name: inverter
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Start time
+        example: consequatur
+        explode: true
+        in: query
+        name: start
+        required: false
+        schema:
+          description: Start time
+          example: consequatur
+          type: ISO8601-datetime
+        style: form
+      - description: End time
+        example: consequatur
+        explode: true
+        in: query
+        name: end
+        required: false
+        schema:
+          description: End time
+          example: consequatur
+          type: ISO8601-datetime
+        style: form
+      - description: Whether 'cleared' events should be included with the data. Default
+          is false
+        example: false
+        explode: true
+        in: query
+        name: cleared
+        required: false
+        schema:
+          description: Whether 'cleared' events should be included with the data.
+            Default is false
+          example: false
+          type: boolean
+        style: form
+      - description: Page number to return
+        example: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          description: Page number to return
+          example: 1
+          type: integer
+        style: form
+      - description: Number of items to return in a page. Defaults to 15
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          description: Number of items to return in a page. Defaults to 15
+          type: integer
+        style: form
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_1'
+        content:
+          application/json:
+            schema:
+              properties:
+                cleared:
+                  example: false
+                  type: boolean
+                start:
+                  example: consequatur
+                  type: string
+                end:
+                  example: consequatur
+                  type: string
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_13'
+      summary: Get Events
+      tags:
+      - Inverter Data
+  /inverter/{inverter}/data-points/{date}:
+    get:
+      description: Displays the entire data packet set from the chosen date
+      parameters:
+      - description: The serial number of the inverter
+        example: consequatur
+        explode: false
+        in: path
+        name: inverter
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The date to fetch the data. This assumes the date at the system's
+          local time
+        example: consequatur
+        explode: false
+        in: path
+        name: date
+        required: true
+        schema:
+          type: ISO8601-date
+        style: simple
+      - description: Page number to return
+        example: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          description: Page number to return
+          example: 1
+          type: integer
+        style: form
+      - description: Number of items to return in a page. Defaults to 15
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          description: Number of items to return in a page. Defaults to 15
+          type: integer
+        style: form
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_14'
+      summary: Get Data Points
+      tags:
+      - Inverter Data
+  /site:
+    get:
+      description: Retrieves a list of your sites
+      parameters:
+      - description: Page number to return
+        example: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          description: Page number to return
+          example: 1
+          type: integer
+        style: form
+      - description: Number of items to return in a page. Defaults to 15
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          description: Number of items to return in a page. Defaults to 15
+          type: integer
+        style: form
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_15'
+      summary: Get Your Sites
+      tags:
+      - Site
+  /site/{id}:
+    get:
+      description: Gather a single site's information
+      parameters:
+      - description: The ID of the site.
+        example: 17
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_16'
+      summary: Get Single Site by ID
+      tags:
+      - Site
+  /smart-device:
+    get:
+      description: List the smart devices registered to your account
+      parameters:
+      - description: Page number to return
+        example: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          description: Page number to return
+          example: 1
+          type: integer
+        style: form
+      - description: Number of items to return in a page. Defaults to 15
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          description: Number of items to return in a page. Defaults to 15
+          type: integer
+        style: form
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_17'
+      summary: Get Your Smart Devices
+      tags:
+      - Smart Device
+    post:
+      description: Register a new smart device to your account
+      parameters:
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_2'
+        content:
+          application/json:
+            schema:
+              properties:
+                serial_number:
+                  description: The serial number of the smart device.
+                  example: consequatur
+                  type: string
+                alias:
+                  description: An alternate name for the smart device.
+                  example: consequatur
+                  type: string
+                product_name:
+                  description: The model name of the product.
+                  example: consequatur
+                  type: string
+                manufacturer:
+                  description: The name of the product's manufacturer.
+                  example: consequatur
+                  type: string
+                other_data:
+                  example: consequatur
+                  type: json
+              required:
+              - serial_number
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_18'
+      summary: Create Smart Device
+      tags:
+      - Smart Device
+  /smart-device/{id}:
+    get:
+      description: Get a smart device's information
+      parameters:
+      - description: The ID of the smart device.
+        example: 17
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_19'
+      summary: Get Smart Device by ID
+      tags:
+      - Smart Device
+  /smart-device/{smart-device_id}/data:
+    get:
+      description: Get a list of a smart device's data points
+      parameters:
+      - description: The ID of the smart-device.
+        example: consequatur
+        explode: false
+        in: path
+        name: smart-device_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Page number to return
+        example: 1
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          description: Page number to return
+          example: 1
+          type: integer
+        style: form
+      - description: Number of items to return in a page. Defaults to 15
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          description: Number of items to return in a page. Defaults to 15
+          type: integer
+        style: form
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_20'
+      summary: Get Smart Device Data Points by ID
+      tags:
+      - Smart Device
+  /smart-device/{smart_device_uuid}/data:
+    post:
+      description: Store a data point against a smart device
+      parameters:
+      - example: consequatur
+        explode: false
+        in: path
+        name: smart_device_uuid
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: Bearer {YOUR_API_KEY}
+        explode: false
+        in: header
+        name: Authorization
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_3'
+        content:
+          application/json:
+            schema:
+              properties:
+                time:
+                  description: The date & time that the data point was created
+                  example: consequatur
+                  type: ISO8601-datetime
+                power:
+                  example: 17
+                  type: integer
+              required:
+              - power
+              - time
+              type: object
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_21'
+      summary: Create Smart Device Data Point
+      tags:
+      - Smart Device
+components:
+  requestBodies:
+    inline_object_1:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_1'
+      required: false
+    inline_object:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+      required: true
+    inline_object_3:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_3'
+      required: true
+    inline_object_2:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_2'
+      required: true
+  schemas:
+    inline_response_200_11:
+      example:
+        data:
+          time: 1995-11-21T05:18:06Z
+          solar:
+            power: 3761.9
+            arrays:
+            - array: 1
+              voltage: 202.9
+              current: 788.7
+              power: 98.3
+            - array: 2
+              voltage: 626.5
+              current: 206.8
+              power: 561.2
+          grid:
+            voltage: 1509.2
+            current: 4814
+            power: -4862.3
+            frequency: 221.3
+          battery:
+            percent: 65
+            power: 1344
+            temperature: 7524065.5
+          inverter:
+            temperature: 32577.4
+            power: 86477
+            output_voltage: 148.8
+            output_frequency: 1.375674886E7
+            eps_power: 4741
+          consumption: 36915
+      properties:
+        data:
+          example:
+            time: 1995-11-21T05:18:06Z
+            solar:
+              power: 3761.9
+              arrays:
+              - array: 1
+                voltage: 202.9
+                current: 788.7
+                power: 98.3
+              - array: 2
+                voltage: 626.5
+                current: 206.8
+                power: 561.2
+            grid:
+              voltage: 1509.2
+              current: 4814
+              power: -4862.3
+              frequency: 221.3
+            battery:
+              percent: 65
+              power: 1344
+              temperature: 7524065.5
+            inverter:
+              temperature: 32577.4
+              power: 86477
+              output_voltage: 148.8
+              output_frequency: 1.375674886E7
+              eps_power: 4741
+            consumption: 36915
+          type: object
+      type: object
+    inline_response_200_10:
+      example:
+        data:
+          value: Unknown (32613)
+          success: true
+          message: Read Successfully
+      properties:
+        data:
+          example:
+            value: Unknown (32613)
+            success: true
+            message: Read Successfully
+          type: object
+      type: object
+    inline_response_200_13:
+      example:
+        data:
+        - event: BMS Discharger Over Current
+          start_time: 2002-07-04T08:06:57Z
+          end_time: null
+        - event: Utility Loss
+          start_time: 2016-10-10T00:41:07Z
+          end_time: null
+      properties:
+        data:
+          example:
+          - event: BMS Discharger Over Current
+            start_time: 2002-07-04T08:06:57Z
+            end_time: null
+          - event: Utility Loss
+            start_time: 2016-10-10T00:41:07Z
+            end_time: null
+          items:
+            type: object
+          type: array
+      type: object
+    inline_response_200_12:
+      example:
+        data:
+          time: 1995-11-21T05:18:06Z
+          today:
+            solar: 4527.3
+            grid:
+              import: 753.8
+              export: 83.4
+            battery:
+              charge: 60633.8
+              discharge: 46612.4
+            consumption: 5197.7
+          total:
+            solar: 50373.8
+            grid:
+              import: 6429.6
+              export: 60292.1
+            battery:
+              charge: 44461.3
+              discharge: 44461.3
+            consumption: 5980.9
+      properties:
+        data:
+          example:
+            time: 1995-11-21T05:18:06Z
+            today:
+              solar: 4527.3
+              grid:
+                import: 753.8
+                export: 83.4
+              battery:
+                charge: 60633.8
+                discharge: 46612.4
+              consumption: 5197.7
+            total:
+              solar: 50373.8
+              grid:
+                import: 6429.6
+                export: 60292.1
+              battery:
+                charge: 44461.3
+                discharge: 44461.3
+              consumption: 5980.9
+          type: object
+      type: object
+    inline_response_200_19:
+      example:
+        data:
+        - uuid: 66d025a2-bb1b-4518-b649-e314d8333ff7
+          alias: veniam
+          other_data: []
+        - uuid: 69b0997d-8484-4f2e-ad4b-f6ddf0328fb0
+          alias: nihil
+          other_data: []
+      properties:
+        data:
+          example:
+          - uuid: 66d025a2-bb1b-4518-b649-e314d8333ff7
+            alias: veniam
+            other_data: []
+          - uuid: 69b0997d-8484-4f2e-ad4b-f6ddf0328fb0
+            alias: nihil
+            other_data: []
+          items:
+            type: object
+          type: array
+      type: object
+    inline_response_200_18:
+      example:
+        data:
+        - uuid: 33888f6e-5d87-49c0-ad12-d86e8b0fd4a6
+          alias: laborum
+          other_data: []
+        - uuid: ebdba827-896a-421a-8ada-2a6a32c990c7
+          alias: et
+          other_data: []
+      properties:
+        data:
+          example:
+          - uuid: 33888f6e-5d87-49c0-ad12-d86e8b0fd4a6
+            alias: laborum
+            other_data: []
+          - uuid: ebdba827-896a-421a-8ada-2a6a32c990c7
+            alias: et
+            other_data: []
+          items:
+            type: object
+          type: array
+      type: object
+    inline_response_200_15:
+      example:
+        data:
+        - name: Jeremy Hill
+          account: william.evans
+          date_created: 1987-04-18
+          country: GEORGIA
+          timezone: GMT
+          latitude: 79.284177
+          longitude: 1.10994
+        - name: Michael Lee
+          account: wilkinson.zach
+          date_created: 2006-10-24
+          country: EASTERN_SAMOA
+          timezone: GMT
+          latitude: 11.007701
+          longitude: -51.923595
+      properties:
+        data:
+          example:
+          - name: Jeremy Hill
+            account: william.evans
+            date_created: 1987-04-18
+            country: GEORGIA
+            timezone: GMT
+            latitude: 79.284177
+            longitude: 1.10994
+          - name: Michael Lee
+            account: wilkinson.zach
+            date_created: 2006-10-24
+            country: EASTERN_SAMOA
+            timezone: GMT
+            latitude: 11.007701
+            longitude: -51.923595
+          items:
+            type: object
+          type: array
+      type: object
+    inline_response_200_14:
+      example:
+        data:
+        - time: 1995-11-20T22:18:06Z
+          power:
+            solar:
+              power: 4703
+              arrays:
+              - array: 1
+                voltage: 198.6
+                current: 3.3
+                power: 491
+              - array: 2
+                voltage: 170.8
+                current: 10
+                power: 2806
+            grid:
+              voltage: 128.3
+              current: 98.1
+              power: 19821
+              frequency: 49.25
+            battery:
+              percent: 79
+              power: -2289
+              temperature: 12
+            consumption:
+              power: 22636
+            inverter:
+              temperature: 50
+              power: -7116
+              output_voltage: 144.7
+              output_frequency: 49.69
+              eps_power: 24672
+          today:
+            solar: 43739.3
+            grid:
+              import: 31683.6
+              export: 53843.5
+            battery:
+              charge: 86912.7
+              discharge: 43503.9
+            consumption: 56736.6
+          total:
+            solar: 43533.2
+            grid:
+              import: 46257.7
+              export: 70458.1
+            battery:
+              charge: 10340.8
+              discharge: 10340.8
+            consumption: -119054
+        - time: 2007-12-20T00:15:40Z
+          power:
+            solar:
+              power: 4669
+              arrays:
+              - array: 1
+                voltage: 327.2
+                current: 14.7
+                power: 3162
+              - array: 2
+                voltage: 467.5
+                current: 9.6
+                power: 3517
+            grid:
+              voltage: 38.6
+              current: 23.4
+              power: 10138
+              frequency: 50.85
+            battery:
+              percent: 0
+              power: 1147
+              temperature: -9.1
+            consumption:
+              power: 1557
+            inverter:
+              temperature: 3.3
+              power: 37241
+              output_voltage: 124.6
+              output_frequency: 49.35
+              eps_power: 42873
+          today:
+            solar: 31754.7
+            grid:
+              import: 82575.2
+              export: 77348.3
+            battery:
+              charge: 43720.1
+              discharge: 17527.4
+            consumption: 98808.7
+          total:
+            solar: 87637.7
+            grid:
+              import: 56903.5
+              export: 91852.3
+            battery:
+              charge: 1357
+              discharge: 1357
+            consumption: -78689.5
+      properties:
+        data:
+          example:
+          - time: 1995-11-20T22:18:06Z
+            power:
+              solar:
+                power: 4703
+                arrays:
+                - array: 1
+                  voltage: 198.6
+                  current: 3.3
+                  power: 491
+                - array: 2
+                  voltage: 170.8
+                  current: 10
+                  power: 2806
+              grid:
+                voltage: 128.3
+                current: 98.1
+                power: 19821
+                frequency: 49.25
+              battery:
+                percent: 79
+                power: -2289
+                temperature: 12
+              consumption:
+                power: 22636
+              inverter:
+                temperature: 50
+                power: -7116
+                output_voltage: 144.7
+                output_frequency: 49.69
+                eps_power: 24672
+            today:
+              solar: 43739.3
+              grid:
+                import: 31683.6
+                export: 53843.5
+              battery:
+                charge: 86912.7
+                discharge: 43503.9
+              consumption: 56736.6
+            total:
+              solar: 43533.2
+              grid:
+                import: 46257.7
+                export: 70458.1
+              battery:
+                charge: 10340.8
+                discharge: 10340.8
+              consumption: -119054
+          - time: 2007-12-20T00:15:40Z
+            power:
+              solar:
+                power: 4669
+                arrays:
+                - array: 1
+                  voltage: 327.2
+                  current: 14.7
+                  power: 3162
+                - array: 2
+                  voltage: 467.5
+                  current: 9.6
+                  power: 3517
+              grid:
+                voltage: 38.6
+                current: 23.4
+                power: 10138
+                frequency: 50.85
+              battery:
+                percent: 0
+                power: 1147
+                temperature: -9.1
+              consumption:
+                power: 1557
+              inverter:
+                temperature: 3.3
+                power: 37241
+                output_voltage: 124.6
+                output_frequency: 49.35
+                eps_power: 42873
+            today:
+              solar: 31754.7
+              grid:
+                import: 82575.2
+                export: 77348.3
+              battery:
+                charge: 43720.1
+                discharge: 17527.4
+              consumption: 98808.7
+            total:
+              solar: 87637.7
+              grid:
+                import: 56903.5
+                export: 91852.3
+              battery:
+                charge: 1357
+                discharge: 1357
+              consumption: -78689.5
+          items:
+            type: object
+          type: array
+      type: object
+    inline_response_200_17:
+      example:
+        data:
+        - uuid: a9dc24e7-f14a-40cd-947d-f1a0e7ff7987
+          alias: veniam
+          other_data: []
+        - uuid: e9453fa4-ae59-4c6f-8d57-11dd65e07f16
+          alias: laudantium
+          other_data: []
+      properties:
+        data:
+          example:
+          - uuid: a9dc24e7-f14a-40cd-947d-f1a0e7ff7987
+            alias: veniam
+            other_data: []
+          - uuid: e9453fa4-ae59-4c6f-8d57-11dd65e07f16
+            alias: laudantium
+            other_data: []
+          items:
+            type: object
+          type: array
+      type: object
+    inline_response_200_16:
+      example:
+        data:
+          name: Jeremy Hill
+          account: noah.phillips
+          date_created: 1987-04-18
+          country: GEORGIA
+          timezone: GMT
+          latitude: 79.284177
+          longitude: 1.10994
+      properties:
+        data:
+          example:
+            name: Jeremy Hill
+            account: noah.phillips
+            date_created: 1987-04-18
+            country: GEORGIA
+            timezone: GMT
+            latitude: 79.284177
+            longitude: 1.10994
+          type: object
+      type: object
+    inline_response_200:
+      example:
+        data:
+          id: 238
+          name: francesca.holmes
+          role: ENGINEER
+          email: joshua94@martin.com
+          address: |-
+            Flat 60
+            Kyle Lights
+          country: SOUTH_KOREA
+          telephone_number: 0738 286 7656
+          timezone: East13
+      properties:
+        data:
+          example:
+            id: 238
+            name: francesca.holmes
+            role: ENGINEER
+            email: joshua94@martin.com
+            address: |-
+              Flat 60
+              Kyle Lights
+            country: SOUTH_KOREA
+            telephone_number: 0738 286 7656
+            timezone: East13
+          type: object
+      type: object
+    inline_response_200_9:
+      example:
+        data:
+          value: Unknown (32469)
+      properties:
+        data:
+          example:
+            value: Unknown (32469)
+          type: object
+      type: object
+    inline_object_1:
+      properties:
+        cleared:
+          example: false
+          type: boolean
+        start:
+          example: consequatur
+          type: string
+        end:
+          example: consequatur
+          type: string
+      type: object
+    inline_response_200_21:
+      example:
+        data:
+        - time: 2022-04-01T11:41:55Z
+          power: 498
+        - time: 2022-04-01T11:41:55Z
+          power: 890
+      properties:
+        data:
+          example:
+          - time: 2022-04-01T11:41:55Z
+            power: 498
+          - time: 2022-04-01T11:41:55Z
+            power: 890
+          items:
+            type: object
+          type: array
+      type: object
+    inline_response_200_5:
+      example:
+        data:
+        - serial_number: 49niih5fqc
+          type: WIFI
+          commission_date: 2019-02-20T09:39:40Z
+          inverter:
+            serial: xh7919g641
+            status: UNKNOWN
+            last_online: 2016-04-21T10:48:13Z
+            last_updated: 2005-01-24T21:18:06Z
+            commission_date: 1994-08-23T09:26:50Z
+            info:
+              battery_type: LEAD_ACID
+              model: Unknown
+            warranty:
+              type: null
+              expiry_date: 1999-08-23T09:26:50Z
+            firmware_version:
+              ARM: 420
+              DSP: 426
+            connections: []
+        - serial_number: 18fbei4lfz
+          type: WIFI
+          commission_date: 2020-02-08T08:28:26Z
+          inverter:
+            serial: ra0938o569
+            status: WARNING
+            last_online: 2004-09-25T06:24:36Z
+            last_updated: 1983-08-20T00:54:33Z
+            commission_date: 2010-07-22T05:38:38Z
+            info:
+              battery_type: LITHIUM
+              model: Unknown
+            warranty:
+              type: null
+              expiry_date: 2015-07-22T05:38:38Z
+            firmware_version:
+              ARM: 420
+              DSP: 426
+            connections: []
+      properties:
+        data:
+          example:
+          - serial_number: 49niih5fqc
+            type: WIFI
+            commission_date: 2019-02-20T09:39:40Z
+            inverter:
+              serial: xh7919g641
+              status: UNKNOWN
+              last_online: 2016-04-21T10:48:13Z
+              last_updated: 2005-01-24T21:18:06Z
+              commission_date: 1994-08-23T09:26:50Z
+              info:
+                battery_type: LEAD_ACID
+                model: Unknown
+              warranty:
+                type: null
+                expiry_date: 1999-08-23T09:26:50Z
+              firmware_version:
+                ARM: 420
+                DSP: 426
+              connections: []
+          - serial_number: 18fbei4lfz
+            type: WIFI
+            commission_date: 2020-02-08T08:28:26Z
+            inverter:
+              serial: ra0938o569
+              status: WARNING
+              last_online: 2004-09-25T06:24:36Z
+              last_updated: 1983-08-20T00:54:33Z
+              commission_date: 2010-07-22T05:38:38Z
+              info:
+                battery_type: LITHIUM
+                model: Unknown
+              warranty:
+                type: null
+                expiry_date: 2015-07-22T05:38:38Z
+              firmware_version:
+                ARM: 420
+                DSP: 426
+              connections: []
+          items:
+            type: object
+          type: array
+      type: object
+    inline_response_200_6:
+      example:
+        data:
+          serial_number: 56ynla1zgh
+          type: WIFI
+          commission_date: 2009-06-30T16:54:53Z
+          inverter:
+            serial: mz3754u049
+            status: LOST
+            last_online: 1994-08-23T22:26:50Z
+            last_updated: 1975-08-07T21:28:42Z
+            commission_date: 1973-09-27T07:09:03Z
+            info:
+              battery_type: LEAD_ACID
+              model: Unknown
+            warranty:
+              type: null
+              expiry_date: 1978-09-27T07:09:03Z
+            firmware_version:
+              ARM: 420
+              DSP: 426
+            connections: []
+      properties:
+        data:
+          example:
+            serial_number: 56ynla1zgh
+            type: WIFI
+            commission_date: 2009-06-30T16:54:53Z
+            inverter:
+              serial: mz3754u049
+              status: LOST
+              last_online: 1994-08-23T22:26:50Z
+              last_updated: 1975-08-07T21:28:42Z
+              commission_date: 1973-09-27T07:09:03Z
+              info:
+                battery_type: LEAD_ACID
+                model: Unknown
+              warranty:
+                type: null
+                expiry_date: 1978-09-27T07:09:03Z
+              firmware_version:
+                ARM: 420
+                DSP: 426
+              connections: []
+          type: object
+      type: object
+    inline_response_200_7:
+      example:
+        data:
+          success: true
+          message: Read Successfully
+      properties:
+        data:
+          example:
+            success: true
+            message: Read Successfully
+          type: object
+      type: object
+    inline_response_200_20:
+      example:
+        data:
+        - time: 2022-04-01T11:41:55Z
+          power: 495
+        - time: 2022-04-01T11:41:55Z
+          power: 463
+      properties:
+        data:
+          example:
+          - time: 2022-04-01T11:41:55Z
+            power: 495
+          - time: 2022-04-01T11:41:55Z
+            power: 463
+          items:
+            type: object
+          type: array
+      type: object
+    inline_response_200_8:
+      example:
+        data:
+          id: 96
+          name: 418 Meter Direction
+      properties:
+        data:
+          example:
+            id: 96
+            name: 418 Meter Direction
+          type: object
+      type: object
+    inline_object_3:
+      properties:
+        time:
+          description: The date & time that the data point was created
+          example: consequatur
+          type: ISO8601-datetime
+        power:
+          example: 17
+          type: integer
+      required:
+      - power
+      - time
+      type: object
+    inline_object_2:
+      properties:
+        serial_number:
+          description: The serial number of the smart device.
+          example: consequatur
+          type: string
+        alias:
+          description: An alternate name for the smart device.
+          example: consequatur
+          type: string
+        product_name:
+          description: The model name of the product.
+          example: consequatur
+          type: string
+        manufacturer:
+          description: The name of the product's manufacturer.
+          example: consequatur
+          type: string
+        other_data:
+          example: consequatur
+          type: json
+      required:
+      - serial_number
+      type: object
+    inline_response_200_1:
+      example:
+        data:
+          id: 238
+          name: lewis.campbell
+          role: OWNER
+          email: adam98@yahoo.com
+          address: 56 Edwards Glen
+          country: SLOVAKIA
+          telephone_number: (0075) 381 2360
+          timezone: West9
+      properties:
+        data:
+          example:
+            id: 238
+            name: lewis.campbell
+            role: OWNER
+            email: adam98@yahoo.com
+            address: 56 Edwards Glen
+            country: SLOVAKIA
+            telephone_number: (0075) 381 2360
+            timezone: West9
+          type: object
+      type: object
+    inline_response_200_2:
+      example:
+        data:
+          id: 238
+          name: kelly44
+          role: ADMIN
+          email: hall.noah@gmail.co.uk
+          address: |-
+            Flat 31
+            King Lake
+          country: TONGA
+          telephone_number: (0064) 295 7686
+          timezone: East4
+      properties:
+        data:
+          example:
+            id: 238
+            name: kelly44
+            role: ADMIN
+            email: hall.noah@gmail.co.uk
+            address: |-
+              Flat 31
+              King Lake
+            country: TONGA
+            telephone_number: (0064) 295 7686
+            timezone: East4
+          type: object
+      type: object
+    inline_object:
+      properties:
+        value:
+          description: The value of the setting
+          example: consequatur
+          type: mixed
+      required:
+      - value
+      type: object
+    inline_response_200_3:
+      example:
+        data:
+        - id: 238
+          name: wright.dylan
+          role: ADMIN
+          email: maisie88@gmail.com
+          address: 48 Anderson Square
+          country: MONGOLIA
+          telephone_number: 06063 382394
+          timezone: West3
+        - id: 239
+          name: julie.richardson
+          role: EXTERNAL
+          email: samantha56@hotmail.com
+          address: 3 Grace Ferry
+          country: INDIA
+          telephone_number: +44(0)9295459343
+          timezone: East12
+      properties:
+        data:
+          example:
+          - id: 238
+            name: wright.dylan
+            role: ADMIN
+            email: maisie88@gmail.com
+            address: 48 Anderson Square
+            country: MONGOLIA
+            telephone_number: 06063 382394
+            timezone: West3
+          - id: 239
+            name: julie.richardson
+            role: EXTERNAL
+            email: samantha56@hotmail.com
+            address: 3 Grace Ferry
+            country: INDIA
+            telephone_number: +44(0)9295459343
+            timezone: East12
+          items:
+            type: object
+          type: array
+      type: object
+    inline_response_200_4:
+      example:
+        data:
+        - id: 238
+          name: rose.phoebe
+          role: OWNER
+          email: adams.scott@gmail.com
+          address: 80 Collins Land
+          country: CANARY_ISLANDS
+          telephone_number: +44(0)316836121
+          timezone: West4
+        - id: 239
+          name: owen67
+          role: VIEWER
+          email: arthur94@gmail.com
+          address: 33 Sean Valley
+          country: PARAGUAY
+          telephone_number: +44(0)4011 038979
+          timezone: East9
+      properties:
+        data:
+          example:
+          - id: 238
+            name: rose.phoebe
+            role: OWNER
+            email: adams.scott@gmail.com
+            address: 80 Collins Land
+            country: CANARY_ISLANDS
+            telephone_number: +44(0)316836121
+            timezone: West4
+          - id: 239
+            name: owen67
+            role: VIEWER
+            email: arthur94@gmail.com
+            address: 33 Sean Valley
+            country: PARAGUAY
+            telephone_number: +44(0)4011 038979
+            timezone: East9
+          items:
+            type: object
+          type: array
+      type: object
+  securitySchemes:
+    default:
+      scheme: bearer
+      type: http
